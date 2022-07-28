@@ -1,0 +1,57 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 100px 80px;
+  padding: 4px 5px 5px 15px;
+}
+
+.grid img {
+  width: 216px;
+}
+
+.grid .connectButton {
+  width: 100.44px;
+  background-color: transparent;
+  border: 2px solid red;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 16px;
+  height: 39.35px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.grid .connectButton:hover {
+  background-color: black;
+}
+
+.grid .connectButton {
+  align-self: center;
+  justify-self: end;
+}
+
+.navButton {
+  width: 40.44px;
+  background-color: transparent;
+  border: 2px solid red;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 16px;
+  height: 39.35px;
+  border-radius: 5px;
+  align-self: center;
+  justify-self: end;
+  cursor: pointer;
+}
+
+.navButton:hover {
+  background-color: black;
+}
+
+@media only screen and (min-width: 547px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 4px 77px 5px 15px;
+  }
+
+  .navButton {
+    display: none;
+  }
+}
