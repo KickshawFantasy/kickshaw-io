@@ -7,9 +7,11 @@ const Mintpage = () => {
   return (
     <>
       <Header />
-
       <div className={styles.grid}>
-        <Sidemenu />
+        <div>
+          <Sidemenu />
+        </div>
+        <h1>Test</h1>
       </div>
     </>
   );

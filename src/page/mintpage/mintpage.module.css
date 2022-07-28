@@ -1,0 +1,16 @@
+.grid {
+  grid-template-columns: 1fr;
+}
+
+.grid div:first-child {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (min-width: 547px) {
+  .grid {
+    grid-template-columns: 200px 1fr;
+  }
+}
