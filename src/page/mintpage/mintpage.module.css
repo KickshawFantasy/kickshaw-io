@@ -46,6 +46,7 @@
   max-width: 1000px;
   margin: 45px 0;
   padding-bottom: 45px;
+  grid-gap: 30px;
 }
 
 .mintGrid {
@@ -74,6 +75,6 @@
 @media only screen and (min-width: 1000px) {
   .mintGrid {
     grid-template-columns: 1fr 1fr;
-    grid-gap: 5px;
+    grid-gap: 0;
   }
 }
