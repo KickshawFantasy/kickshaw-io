@@ -20,14 +20,14 @@ const Sidemenu = () => {
           <li>
             {" "}
             <div>
-              <i class="bi bi-dice-1-fill feather"></i>
+              <i className="bi bi-dice-1-fill feather"></i>
               <a href="https://test.com">Platinum</a>
             </div>
           </li>
           <li>
             {" "}
             <div>
-              <i class="bi bi-dice-2-fill feather"></i>
+              <i className="bi bi-dice-2-fill feather"></i>
 
               <a href="https://test.com">Gold</a>
             </div>
@@ -35,36 +35,36 @@ const Sidemenu = () => {
         </ul>
       </div>
       <div>
-        <i class="bi bi-star-fill feather"></i>
+        <i className="bi bi-star-fill feather"></i>
         <a href="https://test.com">Standings</a>
       </div>
       <div>
-        <i class="bi bi-bar-chart-line-fill feather"></i>
+        <i className="bi bi-bar-chart-line-fill feather"></i>
         <a href="https://test.com">Player Stats</a>
       </div>
       <div>
-        <i class="bi bi-list-columns-reverse feather"></i>
+        <i className="bi bi-list-columns-reverse feather"></i>
         <a href="https://test.com"> Rules/Scoring</a>
       </div>
       <div>
-        <i class="bi bi-trophy-fill feather"></i>
+        <i className="bi bi-trophy-fill feather"></i>
         <a href="https://test.com">Matic Rewards</a>
       </div>
       <div>
-        <i class="bi bi-file-text-fill feather"></i>
+        <i className="bi bi-file-text-fill feather"></i>
         <a href="https://test.com">Docs</a>
         <ul>
           <li>
             {" "}
             <div>
-              <i class="bi bi-question-square-fill feather"></i>
+              <i className="bi bi-question-square-fill feather"></i>
               <a href="https://test.com">Help/FAQs</a>
             </div>
           </li>
           <li>
             {" "}
             <div>
-              <i class="bi bi-info-square-fill feather"></i>
+              <i className="bi bi-info-square-fill feather"></i>
 
               <a href="https://test.com">Polygon</a>
             </div>
@@ -72,7 +72,7 @@ const Sidemenu = () => {
           <li>
             {" "}
             <div>
-              <i class="bi bi-infinity feather"></i>
+              <i className="bi bi-infinity feather"></i>
 
               <a href="https://test.com">Metamask</a>
             </div>
@@ -80,7 +80,7 @@ const Sidemenu = () => {
           <li>
             {" "}
             <div>
-              <i class="bi bi-infinity feather"></i>
+              <i className="bi bi-infinity feather"></i>
 
               <a href="https://test.com">WalletConnect</a>
             </div>
@@ -88,7 +88,7 @@ const Sidemenu = () => {
           <li>
             {" "}
             <div>
-              <i class="bi bi-emoji-angry-fill feather"></i>
+              <i className="bi bi-emoji-angry-fill feather"></i>
 
               <a href="https://test.com">Fightpaper</a>
             </div>
@@ -96,7 +96,7 @@ const Sidemenu = () => {
         </ul>
       </div>
       <div>
-        <i class="bi bi-discord feather"></i>
+        <i className="bi bi-discord feather"></i>
         <a href="https://test.com">KickShaw Tribe</a>
       </div>
     </div>

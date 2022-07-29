@@ -1,6 +1,6 @@
 export const Platinum = {
   name: "Platinum League",
-  image: "../../assets/red.png",
+  image: "black.png",
   description: "Receive 34 random NFTs that makes up a deck",
   price: 10,
   contract: "",
@@ -9,7 +9,7 @@ export const Platinum = {
 
 export const Gold = {
   name: "Gold League",
-  image: "../../assets/red.png",
+  image: "red.png",
   description: "Receive 34 random NFTs that makes up a deck",
   price: 105,
   contract: "",

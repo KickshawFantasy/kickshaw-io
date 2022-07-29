@@ -9,9 +9,11 @@ import Footer from "../../component/footer/footer";
 const Mintpage = () => {
   const [menu, setmenu] = useState(false);
 
+  const [connected, setconnected] = useState(false);
+
   return (
     <>
-      <Header setMenu={setmenu} />
+      <Header connection={[connected, setconnected]} setMenu={setmenu} />
       <div className={styles.grid}>
         <div className={menu ? "" : styles.removed}>
           <Sidemenu />
@@ -27,8 +29,8 @@ const Mintpage = () => {
           </p>
           <hr />
           <div className={styles.mintGrid}>
-            <Mintbox data={Platinum} />
-            <Mintbox data={Gold} />
+            <Mintbox connection={[connected]} data={Platinum} />
+            <Mintbox connection={[connected]} data={Gold} />
           </div>
           <Footer />
         </div>
