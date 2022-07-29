@@ -1,0 +1,60 @@
+.mintcontainer {
+  border: 3px solid #ff0000;
+  border-radius: 10px;
+  width: 300px !important;
+  margin: 0 auto;
+  padding: 22px 0;
+}
+
+.mintcontainer h3 {
+  margin-top: 0;
+}
+
+.mintcontainer img {
+  width: 189px;
+  height: 274px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.mintcontainer p,
+.mintcontainer span {
+  margin: 15px auto;
+  text-align: left;
+}
+
+.mintcontainer span {
+  text-align: left;
+  display: block;
+  width: 70%;
+  padding-left: 15px;
+}
+
+.mintButton {
+  width: 100.44px;
+  background-color: transparent;
+  border: 2px solid red;
+  color: rgba(255, 255, 255, 1);
+  font-size: 16px;
+  height: 39.35px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+.mintButton:hover {
+  background-color: rgba(255, 0, 0, 1);
+  color: black;
+  border: none;
+}
+
+@media only screen and (min-width: 547px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 4px 77px 5px 15px;
+  }
+
+  .navButton {
+    display: none;
+  }
+}

@@ -1,16 +1,79 @@
 .grid {
-  grid-template-columns: 1fr;
+  display: block;
+  position: absolute;
+  width: -webkit-fill-available;
+  background-color: black;
+}
+
+.grid h1 {
+  color: white;
+  padding-left: 15px;
 }
 
 .grid div:first-child {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 100%;
+  display: block;
+  position: inherit;
+  background-color: black;
+  top: 0px;
+  left: 0;
+  width: -webkit-fill-available;
+}
+
+.grid > div {
+  padding-bottom: 40px;
+}
+
+.grid .removed {
+  display: none !important;
+}
+
+.mintbody p {
+  font-size: 14px;
+  width: 70%;
+  padding-left: 15px;
+}
+
+.mintbody hr {
+  background-color: #424242;
+  border: none;
+  height: 10px;
+}
+
+.mintGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  text-align: center;
+  max-width: 1000px;
+  margin: 45px 0;
+  padding-bottom: 45px;
+}
+
+.mintGrid {
+  color: white;
 }
 
 @media only screen and (min-width: 547px) {
   .grid {
-    grid-template-columns: 200px 1fr;
+    display: grid;
+
+    grid-template-columns: 205px 1fr;
+  }
+  .grid div:first-child {
+    position: static;
+    top: auto;
+    width: auto;
+    height: auto;
+    display: block !important;
+  }
+
+  .mintbody hr {
+    margin-right: 20%;
+  }
+}
+
+@media only screen and (min-width: 1000px) {
+  .mintGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 5px;
   }
 }
