@@ -1,0 +1,35 @@
+.mintbox {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+
+.mintbox p {
+  font-size: 15px;
+  color: rgb(185, 185, 185);
+}
+
+.mintbox button {
+  justify-self: end;
+  width: 129px;
+  background-color: transparent;
+  border: 2px solid red;
+  color: rgba(255, 255, 255, 1);
+  font-size: 15px;
+  height: 39.35px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+.mintbox button:hover {
+  background-color: rgba(255, 0, 0, 1);
+  color: black;
+  border: none;
+}
+
+@media only screen and (min-width: 700px) {
+  .mintbox {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./mintbox.module.css";
 import { ethers } from "ethers";
-import mintABI from "./mintabi.json";
+import mintABI from "../../mintabi.json";
 import Loader from "../loader/loader";
 import Message from "../message/message";
+import { mintContract } from "../../config";
 
 const Mintbox = (props) => {
   const [connected] = props.connection;
-  const mintContract = "0xEeDC5d506a1543429A0fbd9F86bbD0703A6F71cC";
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");

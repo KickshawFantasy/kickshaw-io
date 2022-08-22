@@ -1,0 +1,25 @@
+.adminbody {
+  padding-top: 15px;
+  padding-bottom: 25px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.adminbody > h1 {
+  color: #f10101;
+  text-align: center;
+  font-size: 38px;
+}
+
+.adminbody p {
+  color: #f10101;
+  font-size: 20px;
+}
+
+.nouser {
+  background-color: rgb(90, 90, 90);
+  color: #ffffff !important;
+  padding: 10px 15px;
+  font-size: 16px !important;
+  text-align: center;
+}

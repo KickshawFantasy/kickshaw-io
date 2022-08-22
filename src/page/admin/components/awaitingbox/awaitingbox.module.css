@@ -1,0 +1,10 @@
+.awaitingbox {
+  background-color: #4a4a4a;
+
+  padding: 2% 5%;
+}
+
+.awaitingbox h3 {
+  font-size: 18px;
+  color: white;
+}
