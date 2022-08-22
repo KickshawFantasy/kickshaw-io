@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ethers } from "ethers";
 import styles from "./mintbox.module.css";
 import { mintContract } from "../../../../config";
@@ -9,8 +9,145 @@ import Message from "../../../../component/message/message";
 const Mintbox = ({ data, connection }) => {
   const [connected] = connection;
 
+  const [loader, setloader] = useState(false);
+
+  const platinumLinks = [
+    "https://2022-platinum-qb1.s3.filebase.com/",
+    "https://2022-platinum-qb2.s3.filebase.com/",
+    "https://2022-platinum-qbr.s3.filebase.com/",
+    "https://2022-platinum-rb1.s3.filebase.com/",
+    "https://2022-platinum-rb2.s3.filebase.com/",
+    "https://2022-platinum-rb3.s3.filebase.com/",
+    "https://2022-platinum-rbr.s3.filebase.com/",
+    "https://2022-platinum-wri.s3.filebase.com/",
+    "https://2022-platinum-wr2.s3.filebase.com/",
+    "https://2022-platinum-wr3.s3.filebase.com/",
+    "https://2022-platinum-wr4.s3.filebase.com/",
+    "https://2022-platinum-wm.s3.filebase.com/",
+    "https://2022-platinum-te1.s3.filebase.com/",
+    "https://2022-platinum-te2.s3.filebase.com/",
+    "https://2022-platinum-ter.s3.filebase.com/",
+    "https://2022-platinum-di1.s3.filebase.com/",
+    "https://2022-platinum-di2.s3.filebase.com/",
+    "https://2022-platinum-d3.s3.filebase.com/",
+    "https://2022-platinum-dir.s3.filebase.com/",
+    "https://2022-platinum-lb1.s3.filebase.com/",
+    "https://2022-platinum-lb2.s3.filebase.com/",
+    "https://2022-platinum-lb3.s3.filebase.com/",
+    "https://2022-platinum-b4.s3.filebase.com/",
+    "https://2022-platinum-lbr.s3.filebase.com/",
+    "https://2022-platinum-cb1.s3.filebase.com/",
+    "https://2022-platinum-cb2.s3.filebase.com/",
+    "https://2022-platinum-cb3.s3.filebase.com/",
+    "https://2022-platinum-cbr.s3.filebase.com/",
+    "https://2022-platinum-sa1.s3.filebase.com/",
+    "https://2022-platinum-sa2.s3.filebase.com/",
+    "https://2022-platinum-sa3.s3.filebase.com/",
+    "https://2022-platinum-sar.s3.filebase.com/",
+    "https://2022-diamond.s3.filebase.com/",
+  ];
+
+  const goldLinks = [
+    "https://2022-gold-qb1.s3.filebase.com/",
+    "https://2022-gold-qb2.s3.filebase.com/",
+    "https://2022-gold-qbr.s3.filebase.com/",
+    "https://2022-gold-rb1.s3.filebase.com/",
+    "https://2022-gold-rb3.s3.filebase.com/",
+    "https://2022-gold-wr1.s3.filebase.com/",
+    "https://2022-gold-lb3.s3.filebase.com/",
+    "https://2022-gold-lb4.s3.filebase.com/",
+    "https://2022-gold-rb2.s3.filebase.com/",
+    "https://2022-gold-rbr.s3.filebase.com/",
+    "https://2022-gold-wr2.s3.filebase.com/",
+    "https://2022-gold-wr3.s3.filebase.com/",
+    "https://2022-gold-wr4.s3.filebase.com/",
+    "https://2022-gold-wm.s3.filebase.com/",
+    "https://2022-gold-te1.s3.filebase.com/",
+    "https://2022-gold-te2.s3.filebase.com/",
+    "https://2022-gold-ter.s3.filebase.com/",
+    "https://2022-gold-dl1.s3.filebase.com/",
+    "https://2022-gold-di2.s3.filebase.com/",
+    "https://2022-gold-d13.s3.filebase.com/",
+    "https://2022-gold-dir.s3.filebase.com/",
+    "https://2022-gold-lb1.s3.filebase.com/",
+    "https://2022-gold-b2.s3.filebase.com/",
+    "https://2022-gold-lbr.s3.filebase.com/",
+    "https://2022-gold-cb1.s3.filebase.com/",
+    "https://2022-gold-cb2.s3.filebase.com/",
+    "https://2022-gold-cb3.s3.filebase.com/",
+    "https://2022-gold-cbr.s3.filebase.com/",
+    "https://2022-gold-sa1.s3.filebase.com/",
+    "https://2022-gold-sa2.s3.filebase.com/",
+    "https://2022-gold-sa3.s3.filebase.com/",
+    "https://2022-gold-sar.s3.filebase.com/",
+    "https://2022-emerald.s3.filebase.com/",
+  ];
+
   const handleMint = async (receiver, index, league) => {
     console.log(receiver, index, league);
+    if (window.ethereum) {
+      setloader(true);
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(mintContract, mintABI, signer);
+
+      try {
+        const response = await contract.getAllPurchasedArray();
+        console.log(response);
+        if (league === "gold") {
+          const getavailableLink = () => {
+            return new Promise(async (resolve, reject) => {
+              const linkarr = [];
+              goldLinks.forEach((folder, index) => {
+                let link = `${folder}${
+                  Math.floor(Math.random() * 1000) + 1
+                }.json`;
+                while (response.includes(link)) {
+                  link = `${folder}${
+                    Math.floor(Math.random() * 1000) + 1
+                  }.json`;
+                }
+                linkarr.push(link);
+              });
+              if (linkarr.length === 33) {
+                resolve(linkarr);
+              }
+            });
+          };
+
+          const availablelink = await getavailableLink();
+
+          console.log(availablelink);
+          setloader(false);
+        } else if (league === "platinum") {
+          const getavailableLink = () => {
+            return new Promise(async (resolve, reject) => {
+              const linkarr = [];
+              platinumLinks.forEach((folder, index) => {
+                let link = `${folder}${
+                  Math.floor(Math.random() * 500) + 1
+                }.json`;
+                while (response.includes(link)) {
+                  link = `${folder}${Math.floor(Math.random() * 500) + 1}.json`;
+                }
+                linkarr.push(link);
+              });
+              if (linkarr.length === 33) {
+                resolve(linkarr);
+              }
+            });
+          };
+
+          const availablelink = await getavailableLink();
+
+          console.log(availablelink);
+          setloader(false);
+        }
+      } catch (error) {
+        console.log(error);
+        setloader(false);
+      }
+    }
     //do URI maths
   };
   return (
@@ -21,7 +158,7 @@ const Mintbox = ({ data, connection }) => {
           handleMint(data.address, data.index, data.league);
         }}
       >
-        {connected ? "Mint" : "Not Connected"}
+        {loader ? <Loader /> : connected ? "Mint" : "Not Connected"}
       </button>
     </div>
   );

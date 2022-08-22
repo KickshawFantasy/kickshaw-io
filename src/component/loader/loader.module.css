@@ -1,6 +1,6 @@
 .lds-dual-ring {
   width: auto;
-  height: 40px;
+  height: auto;
 }
 .lds-dual-ring:after {
   content: " ";
