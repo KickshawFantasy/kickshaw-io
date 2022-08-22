@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ethers } from "ethers";
 import styles from "./mintbox.module.css";
 import { mintContract } from "../../../../config";
@@ -8,6 +8,8 @@ import Message from "../../../../component/message/message";
 
 const Mintbox = ({ data, connection, refresh }) => {
   const [connected] = connection;
+
+  const arrayRef = useRef();
 
   const [loader, setloader] = useState(false);
   const [message, setMessage] = useState("");
@@ -86,6 +88,12 @@ const Mintbox = ({ data, connection, refresh }) => {
   ];
 
   const handleMint = async (receiver, index, league) => {
+    const numbers = arrayRef.current.value.trim().split(",");
+    if (arrayRef.current.value.trim().length === 0) {
+      setMessage("Mint number cannot be empty");
+
+      return;
+    }
     if (window.ethereum) {
       setloader(true);
       const valueFee = {
@@ -96,20 +104,12 @@ const Mintbox = ({ data, connection, refresh }) => {
       const contract = new ethers.Contract(mintContract, mintABI, signer);
 
       try {
-        const response = await contract.getAllPurchasedArray();
         if (league === "gold") {
           const getavailableLink = () => {
             return new Promise(async (resolve) => {
               const linkarr = [];
               goldLinks.forEach((folder, index) => {
-                let link = `${folder}${
-                  Math.floor(Math.random() * 1000) + 1
-                }.json`;
-                while (response.includes(link)) {
-                  link = `${folder}${
-                    Math.floor(Math.random() * 1000) + 1
-                  }.json`;
-                }
+                let link = `${folder}${numbers[index]}.json`;
                 linkarr.push(link);
               });
               if (linkarr.length === 33) {
@@ -120,6 +120,8 @@ const Mintbox = ({ data, connection, refresh }) => {
 
           const availablelink = await getavailableLink();
 
+          console.log(availablelink);
+
           const result = await contract.mintLeague(
             receiver,
             availablelink,
@@ -129,10 +131,6 @@ const Mintbox = ({ data, connection, refresh }) => {
           );
 
           await result.wait();
-
-          const updater = await contract.arrayupdater(availablelink);
-
-          await updater.wait();
 
           setMessage("League Mint Completed, Refreshing data");
 
@@ -144,12 +142,7 @@ const Mintbox = ({ data, connection, refresh }) => {
             return new Promise(async (resolve, reject) => {
               const linkarr = [];
               platinumLinks.forEach((folder, index) => {
-                let link = `${folder}${
-                  Math.floor(Math.random() * 500) + 1
-                }.json`;
-                while (response.includes(link)) {
-                  link = `${folder}${Math.floor(Math.random() * 500) + 1}.json`;
-                }
+                let link = `${folder}${numbers[index]}.json`;
                 linkarr.push(link);
               });
               if (linkarr.length === 33) {
@@ -170,10 +163,6 @@ const Mintbox = ({ data, connection, refresh }) => {
 
           await result.wait();
 
-          const updater = await contract.arrayupdater(availablelink);
-
-          await updater.wait();
-
           setMessage("League Mint Completed, Refreshing data");
 
           refresh();
@@ -181,7 +170,7 @@ const Mintbox = ({ data, connection, refresh }) => {
           setloader(false);
         }
       } catch (error) {
-        setMessage("caller is not owner");
+        setMessage("check error in console");
         refresh();
         setloader(false);
       }
@@ -204,6 +193,11 @@ const Mintbox = ({ data, connection, refresh }) => {
     <div className={styles.mintbox}>
       {!!pushMessage ? <Message message={pushMessage} /> : ""}
       <p>{data.address}</p>
+      <input
+        ref={arrayRef}
+        type="text"
+        placeholder="[12,25,52,32,68,52,333,65,74,56,96,32,56,85,45,23,65,85,21,45,78,54,12,65,96,36,52,38,75,31,58,89,457]"
+      />
       <button
         onClick={() => {
           connected && handleMint(data.address, data.index, data.league);

@@ -9,6 +9,15 @@
   color: rgb(185, 185, 185);
 }
 
+.mintbox input {
+  border: 1px solid red;
+  width: 320px;
+  height: 29.35px;
+  border-radius: 4px;
+  padding: 3px 7px;
+  justify-self: end;
+}
+
 .mintbox button {
   justify-self: end;
   width: 129px;
@@ -28,8 +37,8 @@
   border: none;
 }
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 1000px) {
   .mintbox {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
   }
 }
