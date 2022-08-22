@@ -14,6 +14,14 @@ const Admin = () => {
   const [goldBuyers, setgoldBuyers] = useState([]);
   const [platinumBuyers, setplatinumBuyers] = useState([]);
 
+  //refresh
+  const [refresh, setRefresh] = useState(false);
+
+  const handleRefresh = () => {
+    console.log("called");
+    setRefresh((prevstate) => !prevstate);
+  };
+
   const checkGoldFromChain = async () => {
     if (window.ethereum) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -79,7 +87,7 @@ const Admin = () => {
   useEffect(() => {
     checkGoldFromChain();
     checkPlatinumFromChain();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className={styles.adminbody}>
@@ -87,7 +95,11 @@ const Admin = () => {
       <h1>Admin Dashboard</h1>
       <p>Users awaiting gold league mint</p>
       {gold.length > 0 ? (
-        <Awaitingbox data={gold} connection={[connected, setconnected]} />
+        <Awaitingbox
+          data={gold}
+          refresh={handleRefresh}
+          connection={[connected, setconnected]}
+        />
       ) : (
         <p className={styles.nouser}>
           {" "}
@@ -97,7 +109,11 @@ const Admin = () => {
 
       <p>Users awaiting platinum league mint</p>
       {platinum.length > 0 ? (
-        <Awaitingbox data={platinum} connection={[connected, setconnected]} />
+        <Awaitingbox
+          data={platinum}
+          refresh={handleRefresh}
+          connection={[connected, setconnected]}
+        />
       ) : (
         <p className={styles.nouser}>
           {" "}

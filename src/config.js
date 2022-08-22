@@ -18,4 +18,4 @@ export const Gold = {
   type: "gold",
 };
 
-export const mintContract = "0x01041c747c100AbFc88Ea0bBAd8975a950c0ca47";
+export const mintContract = "0xDcdDa13411F97E194CAe511a74F576Cb618a362f";

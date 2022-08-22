@@ -73,7 +73,7 @@ const Mintbox = (props) => {
         <button
           className={styles.mintButton}
           onClick={() => {
-            mintHandler(props.data.contract);
+            connected && mintHandler(props.data.contract);
           }}
         >
           {connected ? "Mint" : "Not Connected"}

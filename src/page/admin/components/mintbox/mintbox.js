@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import styles from "./mintbox.module.css";
 import { mintContract } from "../../../../config";
@@ -6,10 +6,12 @@ import mintABI from "../../../../mintabi.json";
 import Loader from "../../../../component/loader/loader";
 import Message from "../../../../component/message/message";
 
-const Mintbox = ({ data, connection }) => {
+const Mintbox = ({ data, connection, refresh }) => {
   const [connected] = connection;
 
   const [loader, setloader] = useState(false);
+  const [message, setMessage] = useState("");
+  const [pushMessage, setPushMessage] = useState("");
 
   const platinumLinks = [
     "https://2022-platinum-qb1.s3.filebase.com/",
@@ -84,19 +86,20 @@ const Mintbox = ({ data, connection }) => {
   ];
 
   const handleMint = async (receiver, index, league) => {
-    console.log(receiver, index, league);
     if (window.ethereum) {
       setloader(true);
+      const valueFee = {
+        gasLimit: 8000000,
+      };
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const contract = new ethers.Contract(mintContract, mintABI, signer);
 
       try {
         const response = await contract.getAllPurchasedArray();
-        console.log(response);
         if (league === "gold") {
           const getavailableLink = () => {
-            return new Promise(async (resolve, reject) => {
+            return new Promise(async (resolve) => {
               const linkarr = [];
               goldLinks.forEach((folder, index) => {
                 let link = `${folder}${
@@ -117,7 +120,21 @@ const Mintbox = ({ data, connection }) => {
 
           const availablelink = await getavailableLink();
 
-          console.log(availablelink);
+          console.log(receiver, availablelink, index, league, valueFee);
+
+          const result = await contract.mintLeague(
+            receiver,
+            availablelink,
+            index,
+            league,
+            valueFee
+          );
+
+          await result.wait();
+          setMessage("League Mint Completed, Refreshing data");
+
+          refresh();
+
           setloader(false);
         } else if (league === "platinum") {
           const getavailableLink = () => {
@@ -140,22 +157,49 @@ const Mintbox = ({ data, connection }) => {
 
           const availablelink = await getavailableLink();
 
-          console.log(availablelink);
+          const result = await contract.mintLeague(
+            receiver,
+            availablelink,
+            index,
+            league,
+            valueFee
+          );
+
+          await result.wait();
+
+          setMessage("League Mint Completed, Refreshing data");
+
+          refresh();
+
           setloader(false);
         }
       } catch (error) {
-        console.log(error);
+        setMessage("caller is not owner");
+        refresh();
         setloader(false);
       }
     }
     //do URI maths
   };
+
+  useEffect(() => {
+    setPushMessage(message);
+    const timeout = setTimeout(() => {
+      setMessage("");
+    }, 4500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [message]);
+
   return (
     <div className={styles.mintbox}>
+      {!!pushMessage ? <Message message={pushMessage} /> : ""}
       <p>{data.address}</p>
       <button
         onClick={() => {
-          handleMint(data.address, data.index, data.league);
+          connected && handleMint(data.address, data.index, data.league);
         }}
       >
         {loader ? <Loader /> : connected ? "Mint" : "Not Connected"}
