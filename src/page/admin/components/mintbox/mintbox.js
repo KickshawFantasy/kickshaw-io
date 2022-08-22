@@ -120,8 +120,6 @@ const Mintbox = ({ data, connection, refresh }) => {
 
           const availablelink = await getavailableLink();
 
-          console.log(receiver, availablelink, index, league, valueFee);
-
           const result = await contract.mintLeague(
             receiver,
             availablelink,
@@ -131,6 +129,11 @@ const Mintbox = ({ data, connection, refresh }) => {
           );
 
           await result.wait();
+
+          const updater = await contract.arrayupdater(availablelink);
+
+          await updater.wait();
+
           setMessage("League Mint Completed, Refreshing data");
 
           refresh();
@@ -166,6 +169,10 @@ const Mintbox = ({ data, connection, refresh }) => {
           );
 
           await result.wait();
+
+          const updater = await contract.arrayupdater(availablelink);
+
+          await updater.wait();
 
           setMessage("League Mint Completed, Refreshing data");
 
