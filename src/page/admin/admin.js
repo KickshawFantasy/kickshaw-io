@@ -18,7 +18,6 @@ const Admin = () => {
   const [refresh, setRefresh] = useState(false);
 
   const handleRefresh = () => {
-    console.log("called");
     setRefresh((prevstate) => !prevstate);
   };
 
