@@ -19,13 +19,11 @@ const Mintpage = () => {
           <Sidemenu />
         </div>
         <div className={styles.mintbody}>
-          <h1>Mint Event</h1>
+          <h1>Join a League</h1>
           <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but{" "}
+            Every Player Deck is loaded with elite NFL fantasy players! Weekly
+            Play-to-Earn Matic Rewards! 100% of the Matic Reward Pool is
+            distributed every season!
           </p>
           <hr />
           <div className={styles.mintGrid}>
