@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { ethers } from "ethers";
+import axios from "axios";
+
 import styles from "./mintbox.module.css";
 import { mintContract } from "../../../../config";
 import mintABI from "../../../../mintabi.json";
@@ -132,7 +134,21 @@ const Mintbox = ({ data, connection, refresh }) => {
 
           await result.wait();
 
-          setMessage("League Mint Completed, Refreshing data");
+          //update DB
+
+          const body = {
+            address: receiver,
+            files: availablelink,
+            league: league,
+          };
+          const dbresponse = await axios.post("http://localhost:3001", body);
+
+          if (dbresponse.status === 200)
+            setMessage("League Mint Completed, Refreshing data");
+          else {
+            console.log(body);
+            setMessage("DB was not updated, check console");
+          }
 
           refresh();
 
