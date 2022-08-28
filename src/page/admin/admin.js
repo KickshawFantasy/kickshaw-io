@@ -101,7 +101,7 @@ const Admin = () => {
         />
       ) : (
         <p className={styles.nouser}>
-          {" "}
+          
           There are no pending users in this section
         </p>
       )}
