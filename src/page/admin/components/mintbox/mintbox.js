@@ -139,7 +139,10 @@ const Mintbox = ({ data, connection, refresh }) => {
             files: availablelink,
             league: league,
           };
-          const dbresponse = await axios.post("http://localhost:3001", body);
+          const dbresponse = await axios.post(
+            "http://kickshawbackend-env.eba-3csxqh3u.us-west-1.elasticbeanstalk.com/",
+            body
+          );
 
           if (dbresponse.status === 200)
             setMessage("League Mint Completed, Refreshing data");
