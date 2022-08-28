@@ -91,8 +91,8 @@ const Mintbox = ({ data, connection, refresh }) => {
 
   const handleMint = async (receiver, index, league) => {
     const numbers = arrayRef.current.value.trim().split(",");
-    if (arrayRef.current.value.trim().length === 0) {
-      setMessage("Mint number cannot be empty");
+    if (arrayRef.current.value.trim().length < 33) {
+      setMessage("Mint list cannot be less than 33");
 
       return;
     }
@@ -122,8 +122,6 @@ const Mintbox = ({ data, connection, refresh }) => {
 
           const availablelink = await getavailableLink();
 
-          console.log(availablelink);
-
           const result = await contract.mintLeague(
             receiver,
             availablelink,
@@ -146,7 +144,6 @@ const Mintbox = ({ data, connection, refresh }) => {
           if (dbresponse.status === 200)
             setMessage("League Mint Completed, Refreshing data");
           else {
-            console.log(body);
             setMessage("DB was not updated, check console");
           }
 
@@ -179,7 +176,20 @@ const Mintbox = ({ data, connection, refresh }) => {
 
           await result.wait();
 
-          setMessage("League Mint Completed, Refreshing data");
+          //update DB
+
+          const body = {
+            address: receiver,
+            files: availablelink,
+            league: league,
+          };
+          const dbresponse = await axios.post("http://localhost:3001", body);
+
+          if (dbresponse.status === 200)
+            setMessage("League Mint Completed, Refreshing data");
+          else {
+            setMessage("DB was not updated, check console");
+          }
 
           refresh();
 
