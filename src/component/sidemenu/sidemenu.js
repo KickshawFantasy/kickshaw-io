@@ -5,7 +5,7 @@ const Sidemenu = () => {
   return (
     <div className={styles.menuFlex}>
       <div>
-        <a href="https://test.com">
+        <a href="https://kickshaw.io/">
           <i className="bi bi-house-door-fill feather"></i>
           Home
         </a>
@@ -13,15 +13,13 @@ const Sidemenu = () => {
       <div>
         <i className={`bi bi-house-door-fill feather ${styles.opacity}`}></i>
 
-        <a className={styles.leagues} href="https://test.com">
-          Leagues
-        </a>
+        <p className={styles.leagues}>Leagues</p>
         <ul>
           <li>
             {" "}
             <div>
               <i className="bi bi-dice-1-fill feather"></i>
-              <a href="https://test.com">Platinum</a>
+              <a href="https://kickshaw.io/?mainmenu=platinum">Platinum</a>
             </div>
           </li>
           <li>
@@ -29,36 +27,36 @@ const Sidemenu = () => {
             <div>
               <i className="bi bi-dice-2-fill feather"></i>
 
-              <a href="https://test.com">Gold</a>
+              <a href="https://kickshaw.io/?mainmenu=gold">Gold</a>
             </div>
           </li>
         </ul>
       </div>
       <div>
         <i className="bi bi-star-fill feather"></i>
-        <a href="https://test.com">Standings</a>
+        <a href="https://kickshaw.io/?mainmenu=standings">Standings</a>
       </div>
       <div>
         <i className="bi bi-bar-chart-line-fill feather"></i>
-        <a href="https://test.com">Player Stats</a>
+        <a href="https://kickshaw.io/?mainmenu=stats">Player Stats</a>
       </div>
       <div>
         <i className="bi bi-list-columns-reverse feather"></i>
-        <a href="https://test.com"> Rules/Scoring</a>
+        <a href="https://kickshaw.io/?mainmenu=rules"> Rules/Scoring</a>
       </div>
       <div>
         <i className="bi bi-trophy-fill feather"></i>
-        <a href="https://test.com">Matic Rewards</a>
+        <a href="https://kickshaw.io/?mainmenu=rewards">Matic Rewards</a>
       </div>
       <div>
         <i className="bi bi-file-text-fill feather"></i>
-        <a href="https://test.com">Docs</a>
+        <p>Docs</p>
         <ul>
           <li>
             {" "}
             <div>
               <i className="bi bi-question-square-fill feather"></i>
-              <a href="https://test.com">Help/FAQs</a>
+              <a href="https://kickshaw.io/?mainmenu=help_faqs">Help/FAQs</a>
             </div>
           </li>
           <li>
@@ -66,7 +64,7 @@ const Sidemenu = () => {
             <div>
               <i className="bi bi-info-square-fill feather"></i>
 
-              <a href="https://test.com">Polygon</a>
+              <a href="https://kickshaw.io/?mainmenu=polygon">Polygon</a>
             </div>
           </li>
           <li>
@@ -74,7 +72,7 @@ const Sidemenu = () => {
             <div>
               <i className="bi bi-infinity feather"></i>
 
-              <a href="https://test.com">Metamask</a>
+              <a href="https://kickshaw.io/?mainmenu=metamask">Metamask</a>
             </div>
           </li>
           <li>
@@ -82,7 +80,9 @@ const Sidemenu = () => {
             <div>
               <i className="bi bi-infinity feather"></i>
 
-              <a href="https://test.com">WalletConnect</a>
+              <a href="https://kickshaw.io/?mainmenu=walletconnect">
+                WalletConnect
+              </a>
             </div>
           </li>
           <li>
@@ -90,14 +90,14 @@ const Sidemenu = () => {
             <div>
               <i className="bi bi-emoji-angry-fill feather"></i>
 
-              <a href="https://test.com">Fightpaper</a>
+              <a href="https://kickshaw.io/?mainmenu=white_paper">Fightpaper</a>
             </div>
           </li>
         </ul>
       </div>
       <div>
         <i className="bi bi-discord feather"></i>
-        <a href="https://test.com">KickShaw Tribe</a>
+        <a href="https://kickshaw.io/?mainmenu=community">KickShaw Tribe</a>
       </div>
     </div>
   );
