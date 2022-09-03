@@ -27,8 +27,6 @@ const Mintbox = (props) => {
         const PlatinumResponse = await contract.getPlatinumArray();
 
         setLength(GoldResponse.length + PlatinumResponse.length);
-
-        console.log(GoldResponse.length + PlatinumResponse.length);
       } catch (error) {
         console.log(error);
       }
