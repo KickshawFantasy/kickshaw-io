@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import styles from "./mintbox.module.css";
 import { ethers } from "ethers";
+import axios from "axios";
+
+import styles from "./mintbox.module.css";
 import mintABI from "../../mintabi.json";
 import Loader from "../loader/loader";
 import Message from "../message/message";
@@ -12,6 +14,26 @@ const Mintbox = (props) => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [pushMessage, setPushMessage] = useState("");
+  const [length, setLength] = useState(0);
+
+  const checkLenFromChain = async () => {
+    if (window.ethereum) {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
+      const contract = new ethers.Contract(mintContract, mintABI, signer);
+
+      try {
+        const GoldResponse = await contract.getGoldArray();
+        const PlatinumResponse = await contract.getPlatinumArray();
+
+        setLength(GoldResponse.length + PlatinumResponse.length);
+
+        console.log(GoldResponse.length + PlatinumResponse.length);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
 
   const mintHandler = async (league) => {
     if (window.ethereum) {
@@ -40,11 +62,20 @@ const Mintbox = (props) => {
           "Membership card was minted succesfully, you will receive complete league momentarily"
         );
         setLoading(false);
+
+        checkLenFromChain();
       } catch (error) {
         setLoading(false);
         setMessage(error.message);
       }
     }
+  };
+
+  const pushMessages = async (number) => {
+    const body = {
+      number,
+    };
+    await axios.post("https://api.kickshaw.io/message", body);
   };
 
   useEffect(() => {
@@ -57,6 +88,12 @@ const Mintbox = (props) => {
       clearTimeout(timeout);
     };
   }, [message]);
+
+  useEffect(() => {
+    if (length > 0) {
+      pushMessages();
+    }
+  }, [length]);
 
   return (
     <div className={styles.mintcontainer}>
