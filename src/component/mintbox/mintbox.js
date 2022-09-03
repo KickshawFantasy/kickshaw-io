@@ -91,7 +91,7 @@ const Mintbox = (props) => {
 
   useEffect(() => {
     if (length > 0) {
-      pushMessages();
+      pushMessages(length);
     }
   }, [length]);
 
