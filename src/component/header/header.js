@@ -11,12 +11,12 @@ const Header = (props) => {
       return;
     }
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    // Prompt user for account connections
-    //const { chainId } = await provider.getNetwork();
-    // if (137 !== chainId) {
-    //   alert(`Your Wallet Is Not Connected The Polygon Network`);
-    //   return;
-    // }
+    //Prompt user for account connections
+    const { chainId } = await provider.getNetwork();
+    if (137 !== chainId) {
+      alert(`Your Wallet Is Not Connected The Polygon Network`);
+      return;
+    }
 
     await provider.send("eth_requestAccounts", []);
     const signer = provider.getSigner();

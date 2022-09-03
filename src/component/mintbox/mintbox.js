@@ -39,9 +39,9 @@ const Mintbox = (props) => {
 
       let fee;
       if (league === 0) {
-        fee = 0.01;
+        fee = 50;
       } else {
-        fee = 0.025;
+        fee = 200;
       }
       const valueFee = {
         value: ethers.utils.parseEther(`${fee}`),
